@@ -6,8 +6,25 @@
 		</script>
 	</head>
 	<body>
-		<input type="text" id="weightValue" value="225" />
-		<input type="text" id="numberOfReps" value="1" />
+		<p>
+			<label for="weightValue">Weight:</label>
+			<input type="text" id="weightValue" value="225" />
+		</p>
+		<p>
+			<label for="numberOfReps">Number of reps:</label>
+			<input type="text" id="numberOfReps" value="1" />
+		</p>
+		<p>
+			<fieldset>
+				<legend>Unit:</legend>
+				
+				<input type="radio" id="lbsButton" value="lbs" name="unit" checked>
+				<label for="lbsButton">Lbs</label>
+
+				<input type="radio" id="kgButton" value="kg" name="unit">
+				<label for="kgButton">Kg</label>
+			</fieldset>
+		</p>
 		<ul id="estimations"></ul>
 	</body>
 </html>

@@ -45,8 +45,15 @@ function updateUI(estimations: Estimations, doc: Document, parent: HTMLElement) 
 	})
 }
 
-function convertInputsToEstimations(weightElem: HTMLInputElement, numberOfRepsElem: HTMLInputElement, estimators: Estimator[]): Estimations {
-	const weight = new Weight({ value: parseInt(weightElem.value ?? "0"), unit: WeightUnit.pounds })
+function convertInputsToEstimations(weightElem: HTMLInputElement, numberOfRepsElem: HTMLInputElement, unitElem: HTMLInputElement, estimators: Estimator[]): Estimations {
+	const unit = function() {
+		switch (unitElem.value) {
+			case "lbs": return WeightUnit.pounds
+			case "kg": return WeightUnit.kilograms
+		}
+	}()!
+
+	const weight = new Weight({ value: parseInt(weightElem.value ?? "0"), unit })
 	const numberOfReps = parseInt(numberOfRepsElem.value ?? "0")
 	return generateEstimations(weight, numberOfReps, estimators)
 }
@@ -65,16 +72,21 @@ export function init(doc: Document) {
 		doc.getElementById("weightValue")!,
 		doc.getElementById("numberOfReps")!,
 		doc.getElementById("estimations")!,
-	]
+	].map(e => e as HTMLInputElement)
 
-	function attach(...elem: HTMLElement[]) {
+	const unitElems = Array.from(doc.getElementsByName("unit"))
+		.map(e => e as HTMLInputElement)
+
+	function attach(...elem: HTMLInputElement[]) {
 		elem.forEach(e => {
-			e.addEventListener('keyup', (ev) => {
-				const estimations = convertInputsToEstimations(weightElem as HTMLInputElement, numberOfRepsElem as HTMLInputElement, estimators)
+			const event = e.type === 'radio' ? 'click' : 'keyup'
+			e.addEventListener(event, () => {
+				const unitElem = unitElems.find(e => e.checked)!
+				const estimations = convertInputsToEstimations(weightElem, numberOfRepsElem, unitElem, estimators)
 				updateUI(estimations, doc, estimationsElem)
 			})
 		})
 	}
 
-	attach(weightElem, numberOfRepsElem)
+	attach(weightElem, numberOfRepsElem, ...unitElems)
 }
