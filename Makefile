@@ -14,3 +14,8 @@ index.js:
 
 serve:
 	python3 -m http.server
+
+dist: build
+	mkdir -p dist
+	cp *.{js,js.map} dist/
+	cp index.html dist/
