@@ -20,3 +20,4 @@ dist: build
 	cp *.js dist/
 	cp *.js.map dist/
 	cp index.html dist/
+	cp icon.png dist/
