@@ -57,7 +57,7 @@ function generateEstimations(weight: rm.Weight, numberOfReps: number, estimators
 
 	function attach(...elem: HTMLElement[]) {
 		elem.forEach(e => {
-			e.addEventListener('change', (ev) => {
+			e.addEventListener('keyup', (ev) => {
 				const estimations = convertInputsToEstimations(weightElem as HTMLInputElement, numberOfRepsElem as HTMLInputElement, estimators)
 				updateUI(estimations, doc, estimationsElem)
 			})
