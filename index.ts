@@ -48,7 +48,7 @@ function generateEstimations(weight: rm.Weight, numberOfReps: number, estimators
 	})
 }
 
-(function(doc: Document) {
+export function init(doc: Document) {
 	const [ weightElem, numberOfRepsElem, estimationsElem ] = [
 		doc.getElementById("weightValue")!,
 		doc.getElementById("numberOfReps")!,
@@ -65,4 +65,4 @@ function generateEstimations(weight: rm.Weight, numberOfReps: number, estimators
 	}
 
 	attach(weightElem, numberOfRepsElem)
-})(document)
+}

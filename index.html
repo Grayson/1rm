@@ -1,12 +1,13 @@
 <html>
 	<head>
-		<script src="index.js"></script>
+		<script lang="js" type="module">
+			import { init } from "./index.js"
+			init(document)
+		</script>
 	</head>
 	<body>
 		<input type="text" id="weightValue" value="225" />
 		<input type="text" id="numberOfReps" value="1" />
-		<ul id="estimations">
-
-		</ul>
+		<ul id="estimations"></ul>
 	</body>
 </html>
