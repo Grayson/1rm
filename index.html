@@ -14,8 +14,6 @@
 		</script>
 		<style>
 			body {
-				padding: 1em 10%;
-
 				// Background thanks to https://www.magicpattern.design/tools/css-backgrounds
 				background-color: #e5e5f7;
 				opacity: 0.8;
@@ -23,33 +21,42 @@
 				background-position:  10px 0, 10px 0, 0 0, 0 0;
 				background-size: 10px 10px;
 				background-repeat: repeat;
+				margin: 0;
 			}
 
 			h1 {
 				text-align: center;
+				background: #aaf;
+				margin: 0;
 			}
 
-			label:has(+ input[type="text"]) {
+			label:has(+ input[type="number"]) {
 				font-size: 2em;
 				display: block;
 				padding: 0.25em 0;
 			}
 
-			input[type="text"] {
+			input[type="number"] {
 				font-size: 1.5em;
 				width: 100%;
+			}
+
+			p {
+				margin: 0.5em 10%;
 			}
 
 			fieldset {
 				background-color: #eef;
 				border: 1px solid gray;
+				font-size: 1.25em;
+				margin: 0.5em 10%;
 			}
 
 			table {
 				border: 1px solid gray;
 				background-color: #ddf;
 				border-spacing: 0;
-				font-size: 1.5em;
+				font-size: 1.25em;
 				width: 100%;
 			}
 
@@ -69,17 +76,20 @@
 				margin: 3em;
 			}
 
+			article {
+				border: 1px solid gray;
+				padding: 1em 0;
+				background: #eef;
+				text-align: justify;
+				margin: 0.5em 10%;
+			}
+
 			article h1 {
 				font-size: 1.3em;
 				margin: 0;
+				background-color: inherit;
 			}
 
-			article {
-				border: 1px solid gray;
-				padding: 1em 10%;
-				background: #eef;
-				text-align: justify;
-			}
 		</style>
 	</head>
 	<body>
@@ -87,11 +97,11 @@
 
 		<p>
 			<label for="weightValue">Weight:</label>
-			<input type="text" id="weightValue" value="225" />
+			<input type="number" id="weightValue" value="225" min="5" />
 		</p>
 		<p>
 			<label for="numberOfReps">Number of reps:</label>
-			<input type="text" id="numberOfReps" value="1" />
+			<input type="number" id="numberOfReps" value="1" min="1" />
 		</p>
 		<p>
 			<fieldset>
@@ -104,7 +114,9 @@
 				<label for="kgButton">Kg</label>
 			</fieldset>
 		</p>
-		<table id="estimations"></table>
+		<p>
+			<table id="estimations"></table>
+		</p>
 		
 		<hr />
 
