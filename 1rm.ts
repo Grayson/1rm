@@ -47,3 +47,13 @@ export function OConner(weight: Weight, numberOfReps: number): Weight {
 	const value = weight.value * (1 + (0.025 * numberOfReps))
 	return new Weight({ value, unit: weight.unit })
 }
+
+export function Adams(weight: Weight, numberOfReps: number): Weight {
+	const value = weight.value * (1 / (1 - 0.02 * numberOfReps))
+	return new Weight({ value, unit: weight.unit })
+}
+
+export function Baechle(weight: Weight, numberOfReps: number): Weight {
+	const value = weight.value * (1 + (0.033 * numberOfReps))
+	return new Weight({ value, unit: weight.unit })
+}
