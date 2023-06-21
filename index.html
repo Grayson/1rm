@@ -23,17 +23,6 @@
 				margin: 0;
 			}
 
-			label:has(+ input[type="number"]) {
-				font-size: 2em;
-				display: block;
-				padding: 0.25em 0;
-			}
-
-			input[type="number"] {
-				font-size: 1.5em;
-				width: 100%;
-			}
-
 			p {
 				margin: 0.5em 10%;
 			}
@@ -46,19 +35,37 @@
 			}
 
 			table {
-				border: 1px solid gray;
-				background-color: #ddf;
+				background: #fff;
 				border-spacing: 0;
-				font-size: 1.25em;
 				width: 100%;
+				font-size: 1.25em;
+				table-layout: auto;
+				border-collapse: collapse;
+			}
+
+			td:first-of-type {
+				width: 1px;
+				white-space: nowrap;
+				text-align: right;
+				color: #393939;
+			}
+
+			tr+tr {
+				border-top: 1px solid #efefef;
+			}
+
+			input[type="number"] {
+				width: 100%;
+				font-size: 1.1em;
+				border: none;
+			}
+
+			.inset {
+				margin: 16px 16px;
 			}
 
 			.formula-name {
 				font-weight: bold;
-			}
-
-			tr:nth-child(even) {
-				background-color: #ccf;
 			}
 
 			td {
@@ -80,7 +87,6 @@
 			article h1 {
 				font-size: 1.3em;
 				margin: 0;
-				background-color: inherit;
 			}
 
 		</style>
@@ -88,24 +94,35 @@
 	<body>
 		<h1>1RM Estimator</h1>
 
-		<p>
-			<label for="weightValue">Weight:</label>
-			<input type="number"
-				inputmode="numeric"
-				pattern="[0-9]*"
-				value="225"
-				min="5"
-				id="weightValue" />
-		</p>
-		<p>
-			<label for="numberOfReps">Number of reps:</label>
-			<input type="number"
-				inputmode="numeric"
-				pattern="[0-9]*"
-				value="1"
-				min="1"
-				id="numberOfReps" />
-		</p>
+		<table>
+			<tr>
+				<td>
+					<label for="weightValue">Weight:</label>
+				</td>
+				<td>
+					<input type="number"
+						inputmode="numeric"
+						pattern="[0-9]*"
+						value="225"
+						min="5"
+						id="weightValue" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="numberOfReps">Number of reps:</label>
+				</td>
+				<td>
+					<input type="number"
+						inputmode="numeric"
+						pattern="[0-9]*"
+						value="1"
+						min="1"
+						id="numberOfReps" />	
+				</td>
+			</tr>
+		</table>
+
 		<p>
 			<fieldset>
 				<legend>Unit:</legend>
@@ -117,9 +134,8 @@
 				<label for="kgButton">Kg</label>
 			</fieldset>
 		</p>
-		<p>
-			<table id="estimations"></table>
-		</p>
+
+		<table id="estimations"></table>
 		
 		<hr />
 
