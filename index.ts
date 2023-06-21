@@ -28,14 +28,14 @@ function updateUI(estimations: Estimations, doc: Document, parent: HTMLElement) 
 		span.textContent = e.name
 		li.appendChild(span)
 
-		const text = doc.createTextNode(e.weight.unit.toLocaleString())
+		const text = doc.createTextNode(" " + e.weight.value.toLocaleString())
 		li.appendChild(text)
 	})
 }
 
-function convertInputsToEstimations(weightElem: HTMLElement, numberOfRepsElem: HTMLElement, estimators: Estimator[]): Estimations {
-	const weight = new rm.Weight({ value: parseInt(weightElem.textContent ?? "0"), unit: rm.WeightUnit.pounds })
-	const numberOfReps = parseInt(numberOfRepsElem.textContent ?? "0")
+function convertInputsToEstimations(weightElem: HTMLInputElement, numberOfRepsElem: HTMLInputElement, estimators: Estimator[]): Estimations {
+	const weight = new Weight({ value: parseInt(weightElem.value ?? "0"), unit: WeightUnit.pounds })
+	const numberOfReps = parseInt(numberOfRepsElem.value ?? "0")
 	return generateEstimations(weight, numberOfReps, estimators)
 }
 
@@ -58,7 +58,7 @@ function generateEstimations(weight: rm.Weight, numberOfReps: number, estimators
 	function attach(...elem: HTMLElement[]) {
 		elem.forEach(e => {
 			e.addEventListener('change', (ev) => {
-				const estimations = convertInputsToEstimations(weightElem, numberOfRepsElem, estimators)
+				const estimations = convertInputsToEstimations(weightElem as HTMLInputElement, numberOfRepsElem as HTMLInputElement, estimators)
 				updateUI(estimations, doc, estimationsElem)
 			})
 		})
