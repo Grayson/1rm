@@ -1,15 +1,21 @@
-import * as rm from './1rm'
+import {
+	Weight,
+	WeightUnit,
+	Estimation,
+
+	Brzycki,
+} from './1rm'
 
 interface Estimator {
 	name: string
-	estimation: rm.Estimation
+	estimation: Estimation
 }
 
 const estimators: Estimator[] = [
-	{ name: "Brzycki", estimation: rm.Brzycki }
+	{ name: "Brzycki", estimation: Brzycki }
 ];
 
-type Estimations = { name: string, weight: rm.Weight }[]
+type Estimations = { name: string, weight: Weight }[]
 
 function updateUI(estimations: Estimations, doc: Document, parent: HTMLElement) {
 	while (parent.firstChild != null) {
@@ -39,11 +45,11 @@ function convertInputsToEstimations(weightElem: HTMLInputElement, numberOfRepsEl
 	return generateEstimations(weight, numberOfReps, estimators)
 }
 
-function generateEstimations(weight: rm.Weight, numberOfReps: number, estimators: Estimator[]): Estimations {
+function generateEstimations(weight: Weight, numberOfReps: number, estimators: Estimator[]): Estimations {
 	return estimators.map( (e) => {
 		return {
 			name: e.name,
-			weight: new rm.Weight({ value: e.estimation(weight, numberOfReps ).value, unit: weight.unit})
+			weight: new Weight({ value: e.estimation(weight, numberOfReps ).value, unit: weight.unit})
 		}
 	})
 }
