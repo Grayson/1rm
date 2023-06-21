@@ -28,7 +28,7 @@ export function Epley(weight: Weight, numberOfReps: number): Weight {
 }
 
 export function Lombardi(weight: Weight, numberOfReps: number): Weight {
-	const value = weight.value * (numberOfReps ^ 0.1)
+	const value = weight.value * Math.pow(numberOfReps, 0.1)
 	return new Weight({ value, unit: weight.unit })
 }
 
