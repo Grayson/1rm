@@ -17,5 +17,6 @@ serve:
 
 dist: build
 	mkdir -p dist
-	cp *.{js,js.map} dist/
+	cp *.js dist/
+	cp *.js.map dist/
 	cp index.html dist/
