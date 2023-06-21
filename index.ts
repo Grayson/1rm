@@ -4,6 +4,9 @@ import {
 	Estimation,
 
 	Brzycki,
+	Epley,
+	Lombardi,
+	OConner,
 } from './1rm'
 
 interface Estimator {
@@ -12,7 +15,10 @@ interface Estimator {
 }
 
 const estimators: Estimator[] = [
-	{ name: "Brzycki", estimation: Brzycki }
+	{ name: "Brzycki", estimation: Brzycki },
+	{ name: "Epley", estimation: Epley },
+	{ name: "Lombardi", estimation: Lombardi },
+	{ name: "O'Conner", estimation: OConner },
 ];
 
 type Estimations = { name: string, weight: Weight }[]
