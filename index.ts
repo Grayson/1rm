@@ -23,25 +23,23 @@ const estimators: Estimator[] = [
 
 type Estimations = { name: string, weight: Weight }[]
 
-function updateUI(estimations: Estimations, doc: Document, parent: HTMLElement) {
+function updateUI(estimations: Estimations, doc: Document, parent: HTMLTableElement) {
 	while (parent.firstChild != null) {
 		parent.removeChild(parent.firstChild!)
 	}
 
-	const ul = doc.createElement("ul")
-	parent.appendChild(ul)
-
 	estimations.forEach(e => {
-		const li = doc.createElement("li")
-		ul.appendChild(li)
+		const row = doc.createElement("tr")
+		parent.appendChild(row)
 
-		const span = doc.createElement("span")
-		span.className = "formula-name"
-		span.textContent = e.name
-		li.appendChild(span)
+		const formulaNameCell = doc.createElement("td")
+		formulaNameCell.className = "formula-name"
+		formulaNameCell.textContent = e.name
+		row.appendChild(formulaNameCell)
 
-		const text = doc.createTextNode(" " + e.weight.toString())
-		li.appendChild(text)
+		const estimationCell = doc.createElement("td")
+		estimationCell.textContent = e.weight.toString()
+		row.appendChild(estimationCell)
 	})
 }
 
@@ -68,11 +66,12 @@ function generateEstimations(weight: Weight, numberOfReps: number, estimators: E
 }
 
 export function init(doc: Document) {
-	const [ weightElem, numberOfRepsElem, estimationsElem ] = [
+	const [ weightElem, numberOfRepsElem ] = [
 		doc.getElementById("weightValue")!,
 		doc.getElementById("numberOfReps")!,
-		doc.getElementById("estimations")!,
 	].map(e => e as HTMLInputElement)
+
+	const estimationsElem = doc.getElementById("estimations")! as HTMLTableElement
 
 	const unitElems = Array.from(doc.getElementsByName("unit"))
 		.map(e => e as HTMLInputElement)

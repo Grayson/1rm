@@ -3,9 +3,68 @@
 		<script lang="js" type="module">
 			import { init } from "./index.js"
 			init(document)
+
+			// Prime one update
+			document.getElementById("weightValue").dispatchEvent(new KeyboardEvent('keyup'))
 		</script>
+		<title>1 Rep Max Estimator</title>
+		<style>
+			body {
+				padding: 1em 20%;
+
+				// Background thanks to https://www.magicpattern.design/tools/css-backgrounds
+				background-color: #e5e5f7;
+				opacity: 0.8;
+				background-image:  linear-gradient(135deg, #d3d4eb 25%, transparent 25%), linear-gradient(225deg, #d3d4eb 25%, transparent 25%), linear-gradient(45deg, #d3d4eb 25%, transparent 25%), linear-gradient(315deg, #d3d4eb 25%, #e5e5f7 25%);
+				background-position:  10px 0, 10px 0, 0 0, 0 0;
+				background-size: 10px 10px;
+				background-repeat: repeat;
+			}
+
+			h1 {
+				text-align: center;
+			}
+
+			label:has(+ input[type="text"]) {
+				font-size: 2em;
+				display: block;
+				padding: 0.25em 0;
+			}
+
+			input[type="text"] {
+				font-size: 1.5em;
+				width: 100%;
+			}
+
+			fieldset {
+				background-color: #eef;
+				border: 1px solid gray;
+			}
+
+			table {
+				border: 1px solid gray;
+				background-color: #ddf;
+				border-spacing: 0;
+				font-size: 1.5em;
+				width: 100%;
+			}
+
+			.formula-name {
+				font-weight: bold;
+			}
+
+			tr:nth-child(even) {
+				background-color: #ccf;
+			}
+
+			td {
+				padding: 0.5em 1em;
+			}
+		</style>
 	</head>
 	<body>
+		<h1>1RM Estimator</h1>
+
 		<p>
 			<label for="weightValue">Weight:</label>
 			<input type="text" id="weightValue" value="225" />
@@ -17,7 +76,7 @@
 		<p>
 			<fieldset>
 				<legend>Unit:</legend>
-				
+
 				<input type="radio" id="lbsButton" value="lbs" name="unit" checked>
 				<label for="lbsButton">Lbs</label>
 
@@ -25,6 +84,6 @@
 				<label for="kgButton">Kg</label>
 			</fieldset>
 		</p>
-		<ul id="estimations"></ul>
+		<table id="estimations"></table>
 	</body>
 </html>
