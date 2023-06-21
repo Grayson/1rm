@@ -40,7 +40,7 @@ function updateUI(estimations: Estimations, doc: Document, parent: HTMLElement) 
 		span.textContent = e.name
 		li.appendChild(span)
 
-		const text = doc.createTextNode(" " + e.weight.value.toLocaleString())
+		const text = doc.createTextNode(" " + e.weight.toString())
 		li.appendChild(text)
 	})
 }

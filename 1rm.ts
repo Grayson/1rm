@@ -3,6 +3,13 @@ export enum WeightUnit {
 	kilograms,
 }
 
+export function convertUnitToString(u: WeightUnit): String {
+	switch (u) {
+		case WeightUnit.pounds: return "lbs"
+		case WeightUnit.kilograms: return "kg"
+	}
+}
+
 export class Weight {
 	public unit: WeightUnit
 	public value: number
@@ -10,6 +17,10 @@ export class Weight {
 	constructor({ value, unit }: { value: number, unit: WeightUnit }) {
 		this.value = value
 		this.unit = unit
+	}
+
+	toString(): string {
+		return `${this.value.toLocaleString()}${convertUnitToString(this.unit)}`
 	}
 }
 
