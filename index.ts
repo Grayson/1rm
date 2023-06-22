@@ -48,13 +48,7 @@ function updateUI(estimations: Estimations, doc: Document, parent: HTMLTableElem
 }
 
 function convertInputsToEstimations(weightElem: HTMLInputElement, numberOfRepsElem: HTMLInputElement, unitElem: HTMLInputElement, estimators: Estimator[]): Estimations {
-	const unit = function() {
-		switch (unitElem.value) {
-			case "lbs": return WeightUnit.pounds
-			case "kg": return WeightUnit.kilograms
-		}
-	}()!
-
+	const unit = unitElem.checked ? WeightUnit.kilograms : WeightUnit.pounds
 	const weight = new Weight({ value: parseInt(weightElem.value ?? "0"), unit })
 	const numberOfReps = parseInt(numberOfRepsElem.value ?? "0")
 	return generateEstimations(weight, numberOfReps, estimators)
@@ -76,20 +70,17 @@ export function init(doc: Document) {
 	].map(e => e as HTMLInputElement)
 
 	const estimationsElem = doc.getElementById("estimations")! as HTMLTableElement
-
-	const unitElems = Array.from(doc.getElementsByName("unit"))
-		.map(e => e as HTMLInputElement)
+	const unitElem = doc.getElementById("unitCheckbox") as HTMLInputElement
 
 	function attach(...elem: HTMLInputElement[]) {
 		elem.forEach(e => {
-			const event = e.type === 'radio' ? 'click' : 'keyup'
+			const event = e.type === 'checkbox' ? 'click' : 'keyup'
 			e.addEventListener(event, () => {
-				const unitElem = unitElems.find(e => e.checked)!
 				const estimations = convertInputsToEstimations(weightElem, numberOfRepsElem, unitElem, estimators)
 				updateUI(estimations, doc, estimationsElem)
 			})
 		})
 	}
 
-	attach(weightElem, numberOfRepsElem, ...unitElems)
+	attach(weightElem, numberOfRepsElem, unitElem)
 }

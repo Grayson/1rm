@@ -14,35 +14,19 @@
 		</script>
 		<style>
 			body {
-				// Background thanks to https://www.magicpattern.design/tools/css-backgrounds
-				background-color: #e5e5f7;
-				opacity: 0.8;
-				background-image:  linear-gradient(135deg, #d3d4eb 25%, transparent 25%), linear-gradient(225deg, #d3d4eb 25%, transparent 25%), linear-gradient(45deg, #d3d4eb 25%, transparent 25%), linear-gradient(315deg, #d3d4eb 25%, #e5e5f7 25%);
-				background-position:  10px 0, 10px 0, 0 0, 0 0;
-				background-size: 10px 10px;
-				background-repeat: repeat;
 				margin: 0;
+				background: #f2f2f6;
+				font-family: "SF Pro", sans-serif;
 			}
 
 			h1 {
 				text-align: center;
-				background: #aaf;
-				margin: 0;
+				margin: 16px;
 			}
 
-			label:has(+ input[type="number"]) {
-				font-size: 2em;
-				display: block;
-				padding: 0.25em 0;
-			}
-
-			input[type="number"] {
-				font-size: 1.5em;
-				width: 100%;
-			}
-
-			p {
-				margin: 0.5em 10%;
+			h2 {
+				color: #808080;
+				margin: 24px 16px 8px 16px;
 			}
 
 			fieldset {
@@ -53,19 +37,73 @@
 			}
 
 			table {
-				border: 1px solid gray;
-				background-color: #ddf;
+				background: #fff;
 				border-spacing: 0;
-				font-size: 1.25em;
 				width: 100%;
+				font-size: 1.25em;
+				table-layout: auto;
+				border-collapse: collapse;
 			}
 
-			.formula-name {
-				font-weight: bold;
+			td:first-of-type {
+				width: 1px;
+				white-space: nowrap;
+				text-align: right;
+				color: #393939;
+				min-width: 200px;
 			}
 
-			tr:nth-child(even) {
-				background-color: #ccf;
+			tr+tr {
+				border-top: 1px solid #efefef;
+			}
+
+			input[type="number"] {
+				width: 100%;
+				font-size: 1.1em;
+				border: none;
+			}
+
+			.switch {
+				display: inline-block;
+				cursor: pointer;
+				background: #efefef;
+				padding: 2px;
+				border-radius: 1em;
+			}
+
+			.switch label {
+				color: #999;
+				padding: 0 8px;
+			}
+
+			.switch input[type="checkbox"] {
+				display: none;
+			}
+
+			.switch label:first-child {
+				background-color: #fff;
+				border-radius: 1em;
+				box-shadow: 1px 2px 3px #999;
+				color: #fff;
+				transition: all 0.3s;
+
+			}
+
+			.switch label:last-child {
+				transition: all 0.3s;
+			}
+
+			.switch label:first-child:has(+ input:checked) {
+				color: #999;
+				background: none;
+				box-shadow: none;
+			}
+
+			.switch input:checked + label:last-child {
+				background-color: #fff;
+				border-radius: 1em;
+				box-shadow: 1px 2px 3px #999;
+				color: #fff;
 			}
 
 			td {
@@ -77,17 +115,16 @@
 			}
 
 			article {
-				border: 1px solid gray;
-				padding: 1em 0;
-				background: #eef;
+				border-top: 1px solid #efefef;
+				border-bottom: 1px solid #efefef;
+				padding: 1em 64px;
+				background: #fff;
 				text-align: justify;
-				margin: 0.5em 10%;
 			}
 
 			article h1 {
 				font-size: 1.3em;
 				margin: 0;
-				background-color: inherit;
 			}
 
 		</style>
@@ -95,38 +132,53 @@
 	<body>
 		<h1>1RM Estimator</h1>
 
-		<p>
-			<label for="weightValue">Weight:</label>
-			<input type="number"
-				inputmode="numeric"
-				pattern="[0-9]*"
-				value="225"
-				min="5"
-				id="weightValue" />
-		</p>
-		<p>
-			<label for="numberOfReps">Number of reps:</label>
-			<input type="number"
-				inputmode="numeric"
-				pattern="[0-9]*"
-				value="1"
-				min="1"
-				id="numberOfReps" />
-		</p>
-		<p>
-			<fieldset>
-				<legend>Unit:</legend>
+		<table>
+			<tr>
+				<td>
+					<label for="weightValue">Weight:</label>
+				</td>
+				<td>
+					<input type="number"
+						inputmode="numeric"
+						pattern="[0-9]*"
+						value="225"
+						min="5"
+						id="weightValue" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="numberOfReps">Number of reps:</label>
+				</td>
+				<td>
+					<input type="number"
+						inputmode="numeric"
+						pattern="[0-9]*"
+						value="1"
+						min="1"
+						id="numberOfReps" />	
+				</td>
+			</tr>
+			<tr>
+				<td>Unit:</td>
+				<td>
+					<div class="switch">
+						<!--
+							Labels are reversed for display purposes
+							e.g. lbs is 0 (false) but on the right for display
+							purposes.
+						-->
+						<label for="unitCheckbox">kg</label>
+						<input type="checkbox" id="unitCheckbox">
+						<label for="unitCheckbox">lbs</label>
+					</div>
+				</td>
+			</tr>
+		</table>
 
-				<input type="radio" id="lbsButton" value="lbs" name="unit" checked>
-				<label for="lbsButton">Lbs</label>
-
-				<input type="radio" id="kgButton" value="kg" name="unit">
-				<label for="kgButton">Kg</label>
-			</fieldset>
-		</p>
-		<p>
-			<table id="estimations"></table>
-		</p>
+		
+		<h2>Estimations</h2>
+		<table id="estimations"></table>
 		
 		<hr />
 
