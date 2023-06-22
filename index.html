@@ -115,8 +115,7 @@
 			}
 
 			article {
-				border-top: 1px solid #efefef;
-				border-bottom: 1px solid #efefef;
+				display: none;
 				padding: 1em 64px;
 				background: #fff;
 				text-align: justify;
@@ -127,6 +126,45 @@
 				margin: 0;
 			}
 
+			body:has(#helpButton:checked) > article {
+				display: block;
+				position: fixed;
+				top: 16px;
+				right: 20%;
+				left: 20%;
+				border-radius: 8px;
+				background: #fff;
+			}
+
+			.help {
+				margin-left: 16px;
+				background: #fff;
+				border-radius: 1.5em;
+				width: 1.5em;
+				height: 1.5em;
+				display: inline-block;
+				text-align: center;
+				line-height: 1.5em;
+				box-shadow: 0px 1px 1px #393939;
+			}
+
+			#helpButton {
+				display: none;
+			}
+
+			#helpClose {
+				visibility: hidden;
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: rgba(0, 0, 0, 0.75);
+			}
+
+			body:has(#helpButton:checked) #helpClose {
+				visibility: visible;
+			}
 		</style>
 	</head>
 	<body>
@@ -179,11 +217,15 @@
 		
 		<h2>Estimations</h2>
 		<table id="estimations"></table>
-		
-		<hr />
 
+		<p>
+			<input type="checkbox" id="helpButton" />
+			<label for="helpButton" class="help">?</label>	
+			<label for="helpButton" id="helpClose"></label>
+		</p>
+		
 		<article>
-			<h1>Explanation</h1>
+
 			<p>
 				In many strength sports such as powerlifting, the ultimate goal
 				is to express strength in a single attempt at a specific
