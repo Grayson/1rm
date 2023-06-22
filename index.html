@@ -61,6 +61,49 @@
 				border: none;
 			}
 
+			.switch {
+				display: inline-block;
+				cursor: pointer;
+				background: #efefef;
+				padding: 2px;
+				border-radius: 1em;
+			}
+
+			.switch label {
+				color: #999;
+				padding: 0 8px;
+			}
+
+			.switch input[type="checkbox"] {
+				display: none;
+			}
+
+			.switch label:first-child {
+				background-color: #fff;
+				border-radius: 1em;
+				box-shadow: 1px 2px 3px #999;
+				color: #fff;
+				transition: all 0.3s;
+
+			}
+
+			.switch label:last-child {
+				transition: all 0.3s;
+			}
+
+			.switch label:first-child:has(+ input:checked) {
+				color: #999;
+				background: none;
+				box-shadow: none;
+			}
+
+			.switch input:checked + label:last-child {
+				background-color: #fff;
+				border-radius: 1em;
+				box-shadow: 1px 2px 3px #999;
+				color: #fff;
+			}
+
 			td {
 				padding: 0.5em 1em;
 			}
@@ -115,9 +158,18 @@
 				</td>
 			</tr>
 			<tr>
-				<td></td>
+				<td>Unit:</td>
 				<td>
-					lbs <input type="checkbox"> kg
+					<div class="switch">
+						<!--
+							Labels are reversed for display purposes
+							e.g. lbs is 0 (false) but on the right for display
+							purposes.
+						-->
+						<label for="unitCheckbox">kg</label>
+						<input type="checkbox" id="unitCheckbox">
+						<label for="unitCheckbox">lbs</label>
+					</div>
 				</td>
 			</tr>
 		</table>
